@@ -3,11 +3,11 @@ package com.mmodding.innovation_insights.recipes;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
-import net.minecraft.item.ItemStack;
-import net.minecraft.network.PacketByteBuf;
-import net.minecraft.recipe.Ingredient;
-import net.minecraft.recipe.RecipeSerializer;
-import net.minecraft.util.Identifier;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.resources.Identifier;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.RecipeSerializer;
 
 public class ExtractionSerializer implements RecipeSerializer<Extraction> {
 
@@ -15,7 +15,7 @@ public class ExtractionSerializer implements RecipeSerializer<Extraction> {
 		return Extraction.DefaultOutputEntry.fromJson(json);
     }
 
-    public Extraction.DefaultOutputEntry defaultOutput(PacketByteBuf buf) {
+    public Extraction.DefaultOutputEntry defaultOutput(FriendlyByteBuf buf) {
         return Extraction.DefaultOutputEntry.read(buf);
     }
 
@@ -28,12 +28,12 @@ public class ExtractionSerializer implements RecipeSerializer<Extraction> {
 		}
 	}
 
-    public Extraction.AdditionalOutputEntry additionalOutput(PacketByteBuf buf) {
+    public Extraction.AdditionalOutputEntry additionalOutput(FriendlyByteBuf buf) {
         return Extraction.AdditionalOutputEntry.read(buf);
     }
 
     @Override
-    public Extraction read(Identifier id, JsonObject json) {
+    public Extraction fromJson(Identifier id, JsonObject json) {
         Extraction.Json recipeJson = new Gson().fromJson(json, Extraction.Json.class);
 
         int time = recipeJson.extractionTime != 0 ? recipeJson.extractionTime : 2000;
@@ -56,11 +56,11 @@ public class ExtractionSerializer implements RecipeSerializer<Extraction> {
     }
 
     @Override
-    public Extraction read(Identifier id, PacketByteBuf buf) {
+    public Extraction fromNetwork(Identifier id, FriendlyByteBuf buf) {
 
         int time = buf.readInt();
 
-        Ingredient input = Ingredient.fromPacket(buf);
+        Ingredient input = Ingredient.fromNetwork(buf);
 
         Extraction.DefaultOutputEntry defaultOutput = this.defaultOutput(buf);
 
@@ -74,11 +74,11 @@ public class ExtractionSerializer implements RecipeSerializer<Extraction> {
     }
 
     @Override
-    public void write(PacketByteBuf buf, Extraction recipe) {
+    public void write(FriendlyByteBuf buf, Extraction recipe) {
 
         buf.writeInt(recipe.getExtractionTime());
 
-        recipe.getInput().write(buf);
+        recipe.getInput().toNetwork(buf);
 
         recipe.getDefaultOutput().write(buf);
 

@@ -2,9 +2,9 @@ package com.mmodding.innovation_insights.init;
 
 import com.mmodding.innovation_insights.InnovationEnergyFlux;
 import com.mmodding.innovation_insights.InnovationInsights;
-import com.mmodding.innovation_insights.blockentities.engines.CompressorEntity;
-import com.mmodding.innovation_insights.blockentities.engines.ExtractorEntity;
-import com.mmodding.innovation_insights.blockentities.generators.AnvilFissionGeneratorEntity;
+import com.mmodding.innovation_insights.block.entity.engine.CompressorEntity;
+import com.mmodding.innovation_insights.block.entity.engine.ExtractorEntity;
+import com.mmodding.innovation_insights.block.entity.generator.AnvilFissionGeneratorEntity;
 import com.mmodding.mmodding_lib.library.blockentities.CustomBlockEntityType;
 import com.mmodding.mmodding_lib.library.initializers.ElementsInitializer;
 import team.reborn.energy.api.EnergyStorage;

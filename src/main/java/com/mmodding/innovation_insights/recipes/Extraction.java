@@ -5,19 +5,19 @@ import com.mmodding.innovation_insights.init.IIRecipeSerializers;
 import com.mmodding.innovation_insights.init.IIRecipeTypes;
 import com.mmodding.innovation_insights.inventories.ImplementedInventory;
 import com.mmodding.mmodding_lib.library.utils.RecipeSerializationUtils;
-import net.minecraft.item.ItemStack;
-import net.minecraft.network.PacketByteBuf;
-import net.minecraft.recipe.Ingredient;
-import net.minecraft.recipe.Recipe;
-import net.minecraft.recipe.RecipeSerializer;
-import net.minecraft.recipe.RecipeType;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.JsonHelper;
-import net.minecraft.world.World;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.GsonHelper;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.level.Level;
 
 public class Extraction implements Recipe<ImplementedInventory> {
 
-    private final Identifier extractionId;
+    private final ResourceLocation extractionId;
     private final int extractionTime;
     private final Ingredient input;
     private final DefaultOutputEntry defaultOutput;
@@ -27,7 +27,7 @@ public class Extraction implements Recipe<ImplementedInventory> {
     private final AdditionalOutputEntry fourthAdditionalOutput;
     private final AdditionalOutputEntry fifthAdditionalOutput;
 
-    public Extraction(Identifier extractionId, int extractionTime, Ingredient input, DefaultOutputEntry defaultOutput, AdditionalOutputEntry firstAdditionalOutput, AdditionalOutputEntry secondAdditionalOutput, AdditionalOutputEntry thirdAdditionalOutput, AdditionalOutputEntry fourthAdditionalOutput, AdditionalOutputEntry fifthAdditionalOutput) {
+    public Extraction(ResourceLocation extractionId, int extractionTime, Ingredient input, DefaultOutputEntry defaultOutput, AdditionalOutputEntry firstAdditionalOutput, AdditionalOutputEntry secondAdditionalOutput, AdditionalOutputEntry thirdAdditionalOutput, AdditionalOutputEntry fourthAdditionalOutput, AdditionalOutputEntry fifthAdditionalOutput) {
         this.extractionId = extractionId;
         this.extractionTime = extractionTime;
         this.input = input;
@@ -53,7 +53,7 @@ public class Extraction implements Recipe<ImplementedInventory> {
     }
 
     @Override
-    public Identifier getId() {
+    public ResourceLocation getId() {
         return this.extractionId;
     }
 
@@ -66,7 +66,7 @@ public class Extraction implements Recipe<ImplementedInventory> {
     }
 
     @Override
-    public ItemStack getOutput() {
+    public ItemStack getResultItem() {
         return this.getDefaultOutput().stack();
     }
 
@@ -95,16 +95,16 @@ public class Extraction implements Recipe<ImplementedInventory> {
 
     @Override
     public ItemStack craft(ImplementedInventory inventory) {
-        return getOutput().copy();
+        return getResultItem().copy();
     }
 
     @Override
-    public boolean matches(ImplementedInventory inventory, World world) {
+    public boolean matches(ImplementedInventory inventory, Level world) {
         return input.test(inventory.getStack(0));
     }
 
     @Override
-    public boolean fits(int width, int height) {
+    public boolean canCraftInDimensions(int width, int height) {
         return false;
     }
 
@@ -124,12 +124,12 @@ public class Extraction implements Recipe<ImplementedInventory> {
 			return new DefaultOutputEntry(RecipeSerializationUtils.getStack(json));
 		}
 
-        public static DefaultOutputEntry read(PacketByteBuf buf) {
-            return new DefaultOutputEntry(buf.readItemStack());
+        public static DefaultOutputEntry read(FriendlyByteBuf buf) {
+            return new DefaultOutputEntry(buf.readItem());
         }
 
-        public void write(PacketByteBuf buf) {
-            buf.writeItemStack(this.stack());
+        public void write(FriendlyByteBuf buf) {
+            buf.writeItem(this.stack());
         }
 	}
 
@@ -137,17 +137,17 @@ public class Extraction implements Recipe<ImplementedInventory> {
 
         public static AdditionalOutputEntry fromJson(JsonObject json) {
             ItemStack stack = RecipeSerializationUtils.getStack(json);
-            int luck = JsonHelper.getInt(json, "luck");
+            int luck = GsonHelper.getAsInt(json, "luck");
             luck = luck != 0 ? luck : 1;
             return new AdditionalOutputEntry(stack, luck);
         }
 
-        public static AdditionalOutputEntry read(PacketByteBuf buf) {
-            return new AdditionalOutputEntry(buf.readItemStack(), buf.readInt());
+        public static AdditionalOutputEntry read(FriendlyByteBuf buf) {
+            return new AdditionalOutputEntry(buf.readItem(), buf.readInt());
         }
 
-        public void write(PacketByteBuf buf) {
-            buf.writeItemStack(this.stack());
+        public void write(FriendlyByteBuf buf) {
+            buf.writeItem(this.stack());
             buf.writeInt(this.luck());
         }
     }

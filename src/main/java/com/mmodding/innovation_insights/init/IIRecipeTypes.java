@@ -4,7 +4,7 @@ import com.mmodding.innovation_insights.InnovationInsights;
 import com.mmodding.innovation_insights.recipes.Compression;
 import com.mmodding.innovation_insights.recipes.Extraction;
 import com.mmodding.mmodding_lib.library.initializers.ElementsInitializer;
-import net.minecraft.util.registry.Registry;
+import net.minecraft.core.Registry;
 
 public class IIRecipeTypes implements ElementsInitializer {
 

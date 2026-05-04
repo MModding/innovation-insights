@@ -1,56 +1,51 @@
 package com.mmodding.innovation_insights;
 
 import com.mmodding.innovation_insights.init.*;
-import com.mmodding.mmodding_lib.library.base.MModdingModInitializer;
-import com.mmodding.mmodding_lib.library.config.Config;
-import com.mmodding.mmodding_lib.library.initializers.ElementsInitializer;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.util.Identifier;
-import org.jetbrains.annotations.Nullable;
-import org.quiltmc.loader.api.ModContainer;
-import team.reborn.energy.api.base.SimpleEnergyItem;
-import team.reborn.energy.api.base.SimpleEnergyStorage;
+import com.mmodding.library.core.api.AdvancedContainer;
+import com.mmodding.library.core.api.ExtendedModInitializer;
+import com.mmodding.library.core.api.management.ElementsManager;
+import com.mmodding.library.core.api.registry.IdentifierUtil;
+import net.minecraft.core.Registry;
+import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
 
-import java.util.ArrayList;
-import java.util.List;
+import net.minecraft.world.item.ItemStack;
 
-public class InnovationInsights implements MModdingModInitializer {
+public class InnovationInsights implements ExtendedModInitializer {
 
 	@Override
-	public @Nullable Config getConfig() {
-		return null;
+	public void setupManager(ElementsManager manager) {
+		manager.content(IIBlocks::register);
+		manager.content(IIBlockEntities::register);
+		manager.content(IIItems::register);
+		manager.content(IIEvents::register);
+		manager.content(IIItemGroups::register);
+		manager.content(IIFeatures::register);
+		manager.content(IIScreenHandlers::register);
+		manager.content(IIRecipeSerializers::register);
+		manager.content(IIRecipeTypes::register);
 	}
 
 	@Override
-	public List<ElementsInitializer> getElementsInitializers() {
-		List<ElementsInitializer> elementsInitializers = new ArrayList<>();
-		elementsInitializers.add(new IIBlocks());
-		elementsInitializers.add(new IIBlockEntities());
-		elementsInitializers.add(new IIItems());
-		elementsInitializers.add(new IIEvents());
-		elementsInitializers.add(new IIItemGroups());
-		elementsInitializers.add(new IIFeatures());
-		elementsInitializers.add(new IIScreenHandlers());
-		elementsInitializers.add(new IIRecipeSerializers());
-		elementsInitializers.add(new IIRecipeTypes());
-		return elementsInitializers;
-	}
+	public void onInitialize(AdvancedContainer mod) {}
 
-	@Override
-	public void onInitialize(ModContainer mod) {
-		MModdingModInitializer.super.onInitialize(mod);
-	}
-
-	public static String id() {
+	public static String namespace() {
 		return "innovation_insights";
 	}
 
 	public static Identifier createId(String path) {
-		return new Identifier(InnovationInsights.id(), path);
+		return Identifier.fromNamespaceAndPath(namespace(), path);
+	}
+
+	public static Identifier createTexture(String path) {
+		return IdentifierUtil.texture(namespace(), path);
+	}
+
+	public static <T> ResourceKey<T> createKey(ResourceKey<? extends Registry<T>> registry, String path) {
+		return ResourceKey.create(registry, createId(path));
 	}
 
 	public static boolean excludeBasics(ItemStack stack) {
-		return !stack.isOf(IIItems.INNOVATION_ENERGY_FLUX_METER) && !stack.isOf(IIItems.WRENCH);
+		return !stack.is(IIItems.INNOVATION_ENERGY_FLUX_METER) && !stack.is(IIItems.WRENCH);
 	}
 }

@@ -4,7 +4,7 @@ import com.mmodding.innovation_insights.InnovationInsights;
 import com.mmodding.innovation_insights.recipes.CompressionSerializer;
 import com.mmodding.innovation_insights.recipes.ExtractionSerializer;
 import com.mmodding.mmodding_lib.library.initializers.ElementsInitializer;
-import net.minecraft.util.registry.Registry;
+import net.minecraft.core.Registry;
 
 public class IIRecipeSerializers implements ElementsInitializer {
 

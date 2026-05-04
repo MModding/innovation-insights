@@ -1,10 +1,10 @@
 package com.mmodding.innovation_insights.init;
 
 import com.mmodding.innovation_insights.InnovationInsights;
-import com.mmodding.innovation_insights.items.AluminiumBattery;
-import com.mmodding.innovation_insights.items.CopperBattery;
-import com.mmodding.innovation_insights.items.InnovationEnergyFluxMeter;
-import com.mmodding.innovation_insights.items.Wrench;
+import com.mmodding.innovation_insights.item.AluminiumBattery;
+import com.mmodding.innovation_insights.item.CopperBattery;
+import com.mmodding.innovation_insights.item.InnovationEnergyFluxMeter;
+import com.mmodding.innovation_insights.item.Wrench;
 import com.mmodding.mmodding_lib.library.initializers.ElementsInitializer;
 import com.mmodding.mmodding_lib.library.items.CustomItem;
 import com.mmodding.mmodding_lib.library.items.settings.AdvancedItemSettings;

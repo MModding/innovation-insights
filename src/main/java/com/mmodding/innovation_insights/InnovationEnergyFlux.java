@@ -1,29 +1,23 @@
 package com.mmodding.innovation_insights;
 
-import com.mmodding.mmodding_lib.library.utils.Colors;
 import net.fabricmc.fabric.api.transfer.v1.context.ContainerItemContext;
-import net.fabricmc.fabric.api.transfer.v1.item.InventoryStorage;
 import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
-import net.minecraft.inventory.Inventory;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.world.World;
-import team.reborn.energy.api.EnergyStorage;
-import team.reborn.energy.api.base.SimpleEnergyItem;
-import team.reborn.energy.api.base.SimpleEnergyStorage;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 
 import java.util.Optional;
 import java.util.function.Consumer;
 
 public class InnovationEnergyFlux {
 
-	public static void findStorageForDirections(World world, BlockPos blockPos, Direction.Type type, Consumer<EnergyStorage> energyStorageConsumer) {
-		type.forEach(direction -> Optional.ofNullable(EnergyStorage.SIDED.find(world, blockPos.offset(direction), direction)).ifPresent(energyStorageConsumer));
+	public static void findStorageForDirections(Level world, BlockPos blockPos, Direction.Plane type, Consumer<EnergyStorage> energyStorageConsumer) {
+		type.forEach(direction -> Optional.ofNullable(EnergyStorage.SIDED.find(world, blockPos.relative(direction), direction)).ifPresent(energyStorageConsumer));
 	}
 
-    public static EnergyStorage findItemStorage(ItemStack stack, Inventory inventory, int index) {
+    public static EnergyStorage findItemStorage(ItemStack stack, net.minecraft.world.Container inventory, int index) {
         Optional<EnergyStorage> storage = Optional.ofNullable(EnergyStorage.ITEM.find(
             stack, ContainerItemContext.ofSingleSlot(InventoryStorage.of(inventory, null).getSlots().get(index))
         ));
@@ -73,7 +67,7 @@ public class InnovationEnergyFlux {
             InnovationEnergyFlux.transfer(this.getEnergyStorage(), IEF.getEnergyStorage(), value);
         }
 
-        default void transferTo(ItemStack stack, Inventory inventory, int index, long value) {
+        default void transferTo(ItemStack stack, net.minecraft.world.Container inventory, int index, long value) {
             EnergyStorage storage = InnovationEnergyFlux.findItemStorage(stack, inventory, index);
             InnovationEnergyFlux.transfer(this.getEnergyStorage(), storage, value);
         }
@@ -82,11 +76,11 @@ public class InnovationEnergyFlux {
             return this.getEnergyStorage().capacity;
         }
 
-        default void readIEF(NbtCompound nbt) {
+        default void readIEF(CompoundTag nbt) {
             this.setIEF(nbt.getLong("IEF"));
         }
 
-        default void writeIEF(NbtCompound nbt) {
+        default void writeIEF(CompoundTag nbt) {
             nbt.putLong("IEF", this.getIEF());
         }
     }
@@ -109,12 +103,12 @@ public class InnovationEnergyFlux {
             this.setStoredEnergy(stack, this.getStoredEnergy(stack) - Math.min(value, this.getStoredEnergy(stack)));
         }
 
-        default void transferTo(ItemStack stack, Inventory inventory, int index, InnovationEnergyFlux.Container IEF, long value) {
+        default void transferTo(ItemStack stack, net.minecraft.world.Container inventory, int index, InnovationEnergyFlux.Container IEF, long value) {
             EnergyStorage storage = InnovationEnergyFlux.findItemStorage(stack, inventory, index);
             InnovationEnergyFlux.transfer(storage, IEF.getEnergyStorage(), value);
         }
 
-        default void transferTo(ItemStack sourceStack, Inventory sourceInventory, int sourceIndex, ItemStack targetStack, Inventory targetInventory, int targetIndex, long value) {
+        default void transferTo(ItemStack sourceStack, net.minecraft.world.Container sourceInventory, int sourceIndex, ItemStack targetStack, net.minecraft.world.Container targetInventory, int targetIndex, long value) {
             EnergyStorage fromStorage = InnovationEnergyFlux.findItemStorage(sourceStack, sourceInventory, sourceIndex);
             EnergyStorage toStorage = InnovationEnergyFlux.findItemStorage(targetStack, targetInventory, targetIndex);
             InnovationEnergyFlux.transfer(fromStorage, toStorage, value);

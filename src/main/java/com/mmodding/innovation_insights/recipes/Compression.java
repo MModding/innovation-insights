@@ -5,23 +5,23 @@ import com.mmodding.innovation_insights.init.IIRecipeTypes;
 import com.mmodding.innovation_insights.inventories.ImplementedInventory;
 import com.mmodding.mmodding_lib.library.utils.RecipeUtils;
 import it.unimi.dsi.fastutil.ints.IntArrayList;
-import net.minecraft.item.ItemStack;
-import net.minecraft.recipe.Ingredient;
-import net.minecraft.recipe.Recipe;
-import net.minecraft.recipe.RecipeSerializer;
-import net.minecraft.recipe.RecipeType;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.collection.DefaultedList;
-import net.minecraft.world.World;
+import net.minecraft.core.NonNullList;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.level.Level;
 
 public class Compression implements Recipe<ImplementedInventory> {
 
-	private final Identifier compressionId;
+	private final ResourceLocation compressionId;
 	private final int compressionTime;
-	private final DefaultedList<Ingredient> ingredients;
+	private final NonNullList<Ingredient> ingredients;
 	private final ItemStack result;
 
-    public Compression(Identifier compressionId, int compressionTime, DefaultedList<Ingredient> ingredients, ItemStack result) {
+    public Compression(ResourceLocation compressionId, int compressionTime, NonNullList<Ingredient> ingredients, ItemStack result) {
 		this.compressionId = compressionId;
 		this.compressionTime = compressionTime;
 		this.ingredients = ingredients;
@@ -37,7 +37,7 @@ public class Compression implements Recipe<ImplementedInventory> {
     }
 
 	@Override
-	public Identifier getId() {
+	public ResourceLocation getId() {
 		return this.compressionId;
 	}
 
@@ -46,27 +46,27 @@ public class Compression implements Recipe<ImplementedInventory> {
 	}
 
 	@Override
-	public DefaultedList<Ingredient> getIngredients() {
+	public NonNullList<Ingredient> getIngredients() {
 		return this.ingredients;
 	}
 
 	@Override
-	public ItemStack getOutput() {
+	public ItemStack getResultItem() {
 		return this.result;
 	}
 
 	@Override
 	public ItemStack craft(ImplementedInventory inventory) {
-		return getOutput().copy();
+		return getResultItem().copy();
 	}
 
 	@Override
-	public boolean matches(ImplementedInventory inventory, World world) {
+	public boolean matches(ImplementedInventory inventory, Level world) {
 		return RecipeUtils.ingredientMatches(inventory, IntArrayList.of(1, 2), this.getIngredients());
 	}
 
     @Override
-    public boolean fits(int width, int height) {
+    public boolean canCraftInDimensions(int width, int height) {
         return false;
     }
 

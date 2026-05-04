@@ -1,60 +1,60 @@
 package com.mmodding.innovation_insights.init;
 
 import com.mmodding.innovation_insights.InnovationInsights;
-import com.mmodding.innovation_insights.blocks.engines.Compressor;
-import com.mmodding.innovation_insights.blocks.engines.Extractor;
-import com.mmodding.innovation_insights.blocks.engines.FurnaceAssembler;
-import com.mmodding.innovation_insights.blocks.reactors.ThermalReactorInterface;
-import com.mmodding.innovation_insights.blocks.generators.AnvilFissionGenerator;
-import com.mmodding.mmodding_lib.library.blocks.CustomBlock;
-import com.mmodding.mmodding_lib.library.blocks.CustomTransparentBlock;
-import com.mmodding.mmodding_lib.library.blocks.settings.DefaultBlockSettings;
-import com.mmodding.mmodding_lib.library.initializers.ElementsInitializer;
-import net.minecraft.block.MapColor;
-import net.minecraft.block.Material;
-import net.minecraft.sound.BlockSoundGroup;
-import org.quiltmc.qsl.block.extensions.api.QuiltBlockSettings;
+import com.mmodding.innovation_insights.block.engine.Compressor;
+import com.mmodding.innovation_insights.block.engine.Extractor;
+import com.mmodding.innovation_insights.block.engine.FurnaceAssembler;
+import com.mmodding.innovation_insights.block.reactor.ThermalReactorInterface;
+import com.mmodding.innovation_insights.block.generator.AnvilFissionGenerator;
+import com.mmodding.library.block.api.util.BlockFactory;
+import com.mmodding.library.core.api.AdvancedContainer;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 
-public class IIBlocks implements ElementsInitializer {
+public class IIBlocks {
 
 	public static final Compressor COMPRESSOR = new Compressor(
-		QuiltBlockSettings.of(Material.STONE).hardness(3.0f).requiresTool(),
+		QuiltBlockSettings.of(Material.STONE).destroyTime(3.0f).requiresCorrectToolForDrops(),
 		true,
 		IIItemGroups.INNOVATION_INSIGHTS_ENGINES
 	);
 
 	public static final CustomBlock CONDENSED_OBSIDIAN = new CustomBlock(
-		QuiltBlockSettings.of(Material.STONE, MapColor.BLACK).requiresTool().strength(100.0F, 2400.0F),
+		QuiltBlockSettings.of(Material.STONE, MaterialColor.COLOR_BLACK).requiresCorrectToolForDrops().strength(100.0F, 2400.0F),
 		true,
 		IIItemGroups.INNOVATION_INSIGHTS_MATERIALS
 	);
 
 	public static final CustomBlock STEEL_BLOCK = new CustomBlock(
-		QuiltBlockSettings.of(Material.METAL).hardness(5.0f).requiresTool(),
+		QuiltBlockSettings.of(Material.METAL).destroyTime(5.0f).requiresCorrectToolForDrops(),
 		true,
 		IIItemGroups.INNOVATION_INSIGHTS_MATERIALS
 	);
 
 	public static final AnvilFissionGenerator ANVIL_FISSION_GENERATOR = new AnvilFissionGenerator(
-		QuiltBlockSettings.of(Material.METAL).hardness(5.0f).requiresTool(),
+		QuiltBlockSettings.of(Material.METAL).destroyTime(5.0f).requiresCorrectToolForDrops(),
 		true,
 		IIItemGroups.INNOVATION_INSIGHTS_GENERATORS
 	);
 
 	public static final Extractor EXTRACTOR = new Extractor(
-		QuiltBlockSettings.of(Material.METAL).hardness(5.0f).requiresTool(),
+		QuiltBlockSettings.of(Material.METAL).destroyTime(5.0f).requiresCorrectToolForDrops(),
 		true,
 		IIItemGroups.INNOVATION_INSIGHTS_ENGINES
 	);
 
 	public static final CustomBlock BAUXITE_ORE = new CustomBlock(
-		QuiltBlockSettings.of(Material.STONE).hardness(3.0f).requiresTool(),
+		QuiltBlockSettings.of(Material.STONE).destroyTime(3.0f).requiresCorrectToolForDrops(),
 		true,
 		IIItemGroups.INNOVATION_INSIGHTS_ORES
 	);
 
 	public static final CustomBlock DEEPSLATE_BAUXITE_ORE = new CustomBlock(
-		QuiltBlockSettings.of(Material.STONE).sounds(BlockSoundGroup.DEEPSLATE).hardness(4.5f),
+		QuiltBlockSettings.of(Material.STONE).sound(SoundType.DEEPSLATE).destroyTime(4.5f),
 		true,
 		IIItemGroups.INNOVATION_INSIGHTS_ORES
 	);
@@ -78,37 +78,44 @@ public class IIBlocks implements ElementsInitializer {
 	);
 
 	public static final CustomTransparentBlock THERMAL_GLASS = new CustomTransparentBlock(
-		QuiltBlockSettings.of(Material.GLASS).hardness(0.5f).sounds(BlockSoundGroup.GLASS).nonOpaque(),
+		QuiltBlockSettings.of(Material.GLASS).destroyTime(0.5f).sound(SoundType.GLASS).noOcclusion(),
 		true,
 		IIItemGroups.INNOVATION_INSIGHTS_MATERIALS
 	);
 
 	public static final ThermalReactorInterface THERMAL_REACTOR_INTERFACE = new ThermalReactorInterface(
-		QuiltBlockSettings.of(Material.METAL).hardness(5.0f).requiresTool(),
+		QuiltBlockSettings.of(Material.METAL).destroyTime(5.0f).requiresCorrectToolForDrops(),
 		true,
 		IIItemGroups.INNOVATION_INSIGHTS_REACTORS
 	);
 
 	public static final CustomBlock THERMAL_REACTOR_CORE = new CustomBlock(
-		QuiltBlockSettings.of(Material.METAL).hardness(5.0f).requiresTool(),
+		QuiltBlockSettings.of(Material.METAL).destroyTime(5.0f).requiresCorrectToolForDrops(),
 		true,
 		IIItemGroups.INNOVATION_INSIGHTS_REACTORS
 	);
 
 	public static final CustomTransparentBlock THERMAL_REACTOR_CONTAINER = new CustomTransparentBlock(
-		QuiltBlockSettings.of(Material.METAL).hardness(5.0f).requiresTool().nonOpaque(),
+		QuiltBlockSettings.of(Material.METAL).destroyTime(5.0f).requiresCorrectToolForDrops().noOcclusion(),
 		true,
 		IIItemGroups.INNOVATION_INSIGHTS_REACTORS
 	);
 
 	public static final CustomBlock THERMAL_REACTOR_FRAME = new CustomBlock(
-		QuiltBlockSettings.of(Material.METAL).hardness(5.0f).requiresTool(),
+		QuiltBlockSettings.of(Material.METAL).destroyTime(5.0f).requiresCorrectToolForDrops(),
 		true,
 		IIItemGroups.INNOVATION_INSIGHTS_REACTORS
 	);
 
-	@Override
-	public void register() {
+	public static Block register(String string, BlockBehaviour.Properties properties) {
+		return register(string, Block::new, properties);
+	}
+
+	public static <T extends Block> Block register(String string, BlockFactory<T> factory, BlockBehaviour.Properties properties) {
+		return Blocks.register(ResourceKey.create(Registries.BLOCK, InnovationInsights.createId(string)), factory::make, properties);
+	}
+
+	public static void register(AdvancedContainer mod) {
 		COMPRESSOR.register(InnovationInsights.createId("compressor"));
 		CONDENSED_OBSIDIAN.register(InnovationInsights.createId("condensed_obsidian"));
 		STEEL_BLOCK.register(InnovationInsights.createId("steel_block"));

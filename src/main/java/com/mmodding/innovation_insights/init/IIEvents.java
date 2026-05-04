@@ -4,10 +4,10 @@ import com.mmodding.innovation_insights.InnovationEnergyFlux;
 import com.mmodding.mmodding_lib.library.initializers.ElementsInitializer;
 import com.mmodding.mmodding_lib.library.utils.Colors;
 import com.mmodding.mmodding_lib.library.utils.TextUtils;
-import net.minecraft.text.MutableText;
-import net.minecraft.text.Text;
-import net.minecraft.text.Texts;
-import net.minecraft.util.Formatting;
+import net.minecraft.ChatFormatting;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.ComponentUtils;
+import net.minecraft.network.chat.MutableComponent;
 import org.quiltmc.qsl.tooltip.api.client.ItemTooltipCallback;
 
 public class IIEvents implements ElementsInitializer {
@@ -17,15 +17,15 @@ public class IIEvents implements ElementsInitializer {
         ItemTooltipCallback.EVENT.register((stack, player, context, lines) -> {
             if (stack.getItem() instanceof InnovationEnergyFlux.Item IEF) {
 
-                MutableText amountText = Texts.bracketed(Text.translatable("ief.innovation_insights.amount"))
-                    .styled(style -> style.withColor(new Colors.RGB(60, 75, 245).toDecimal()));
+                MutableComponent amountText = ComponentUtils.wrapInSquareBrackets(Component.translatable("ief.innovation_insights.amount"))
+                    .withStyle(style -> style.withColor(new Colors.RGB(60, 75, 245).toDecimal()));
 
-                MutableText amountValue = Text.literal(String.valueOf(IEF.getIEF(stack))).styled(style -> style.withColor(Formatting.GREEN));
+                MutableComponent amountValue = Component.literal(String.valueOf(IEF.getIEF(stack))).withStyle(style -> style.withColor(ChatFormatting.GREEN));
 
-                MutableText capacityText = Texts.bracketed(Text.translatable("ief.innovation_insights.capacity"))
-                    .styled(style -> style.withColor(new Colors.RGB(120, 15, 245).toDecimal()));
+                MutableComponent capacityText = ComponentUtils.wrapInSquareBrackets(Component.translatable("ief.innovation_insights.capacity"))
+                    .withStyle(style -> style.withColor(new Colors.RGB(120, 15, 245).toDecimal()));
 
-                MutableText capacityValue = Text.literal(String.valueOf(IEF.getCapacity(stack))).styled(style -> style.withColor(Formatting.RED));
+                MutableComponent capacityValue = Component.literal(String.valueOf(IEF.getCapacity(stack))).withStyle(style -> style.withColor(ChatFormatting.RED));
 
                 lines.add(TextUtils.spaceBetween(amountText, amountValue));
                 lines.add(TextUtils.spaceBetween(capacityText, capacityValue));

@@ -1,9 +1,9 @@
 package com.mmodding.innovation_insights.init;
 
 import com.mmodding.innovation_insights.InnovationInsights;
-import com.mmodding.innovation_insights.screenhandlers.generators.AnvilFissionGeneratorScreenHandler;
-import com.mmodding.innovation_insights.screenhandlers.engines.CompressorScreenHandler;
-import com.mmodding.innovation_insights.screenhandlers.engines.ExtractorScreenHandler;
+import com.mmodding.innovation_insights.menu.generator.AnvilFissionGeneratorScreenHandler;
+import com.mmodding.innovation_insights.menu.engine.CompressorScreenHandler;
+import com.mmodding.innovation_insights.menu.engine.ExtractorScreenHandler;
 import com.mmodding.mmodding_lib.library.initializers.ElementsInitializer;
 import com.mmodding.mmodding_lib.library.screenhandlers.CustomScreenHandlerType;
 
