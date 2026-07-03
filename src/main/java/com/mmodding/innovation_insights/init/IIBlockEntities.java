@@ -1,6 +1,5 @@
 package com.mmodding.innovation_insights.init;
 
-import com.mmodding.innovation_insights.InnovationEnergyFlux;
 import com.mmodding.innovation_insights.InnovationInsights;
 import com.mmodding.innovation_insights.block.entity.engine.CompressorEntity;
 import com.mmodding.innovation_insights.block.entity.engine.ExtractorEntity;
@@ -30,7 +29,7 @@ public class IIBlockEntities implements ElementsInitializer {
 
     public void registerEnergyStorage(CustomBlockEntityType<?> customBlockEntityType) {
         EnergyStorage.SIDED.registerForBlockEntity(
-            (blockEntity, direction) -> ((InnovationEnergyFlux.Container) blockEntity).getEnergyStorage(),
+            (blockEntity, direction) -> ((InnovationEnergyFluxOld.Container) blockEntity).getEnergyStorage(),
             customBlockEntityType.getBlockEntityTypeIfCreated()
         );
     }

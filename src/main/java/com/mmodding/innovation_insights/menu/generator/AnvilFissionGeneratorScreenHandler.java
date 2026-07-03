@@ -2,10 +2,6 @@ package com.mmodding.innovation_insights.menu.generator;
 
 import com.mmodding.innovation_insights.init.IIScreenHandlers;
 import com.mmodding.innovation_insights.init.IITags;
-import com.mmodding.mmodding_lib.library.screenhandlers.BasicScreenHandler;
-import com.mmodding.mmodding_lib.library.screenhandlers.slots.OutputSlot;
-import com.mmodding.mmodding_lib.library.screenhandlers.slots.ProperTagSlot;
-import com.mmodding.mmodding_lib.library.utils.ScreenHandlerUtils;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;

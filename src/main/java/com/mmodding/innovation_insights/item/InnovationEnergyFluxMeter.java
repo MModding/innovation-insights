@@ -1,6 +1,5 @@
 package com.mmodding.innovation_insights.item;
 
-import com.mmodding.innovation_insights.InnovationEnergyFlux;
 import com.mmodding.innovation_insights.InnovationInsights;
 import net.fabricmc.fabric.api.item.v1.FabricItem;
 import net.minecraft.ChatFormatting;
@@ -53,7 +52,7 @@ public class InnovationEnergyFluxMeter extends Item implements FabricItem {
 			if (blockState.hasBlockEntity()) {
 				BlockEntity blockEntity = context.getLevel().getBlockEntity(context.getClickedPos());
 
-				if (blockEntity instanceof InnovationEnergyFlux.Container IEF) {
+				if (blockEntity instanceof InnovationEnergyFluxOld.Container IEF) {
 
 					ItemStack stack = context.getItemInHand();
 

@@ -1,6 +1,5 @@
 package com.mmodding.innovation_insights.block.entity.generator;
 
-import com.mmodding.innovation_insights.InnovationEnergyFlux;
 import com.mmodding.innovation_insights.init.IIBlockEntities;
 import com.mmodding.innovation_insights.init.IIItems;
 import com.mmodding.innovation_insights.init.IITags;
@@ -24,7 +23,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 import team.reborn.energy.api.base.SimpleEnergyStorage;
 
-public class AnvilFissionGeneratorEntity extends BlockEntity implements InnovationEnergyFlux.Container, MenuProvider, ImplementedInventory {
+public class AnvilFissionGeneratorEntity extends BlockEntity implements InnovationEnergyFluxOld.Container, MenuProvider, ImplementedInventory {
 
 	private final SimpleEnergyStorage energyStorage = new SimpleEnergyStorage(100000L, 100000L, 100000L);
 
@@ -50,8 +49,8 @@ public class AnvilFissionGeneratorEntity extends BlockEntity implements Innovati
             this.transferTo(stack, this, 0, 1000);
         }
 		else {
-			InnovationEnergyFlux.findStorageForDirections(
-                this.getLevel(), this.getBlockPos(), Direction.Plane.HORIZONTAL, storage -> InnovationEnergyFlux.transfer(this.getEnergyStorage(), storage, 1000)
+			InnovationEnergyFluxOld.findStorageForDirections(
+                this.getLevel(), this.getBlockPos(), Direction.Plane.HORIZONTAL, storage -> InnovationEnergyFluxOld.transfer(this.getEnergyStorage(), storage, 1000)
             );
 		}
     }

@@ -4,8 +4,6 @@ import com.mmodding.innovation_insights.InnovationInsights;
 import com.mmodding.innovation_insights.block.entity.engine.ExtractorEntity;
 import com.mmodding.innovation_insights.init.IIRecipeTypes;
 import com.mmodding.innovation_insights.recipes.Extraction;
-import com.mmodding.mmodding_lib.library.blocks.CustomBlockWithEntity;
-import net.minecraft.block.*;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;

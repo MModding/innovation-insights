@@ -1,6 +1,5 @@
 package com.mmodding.innovation_insights.init;
 
-import com.mmodding.innovation_insights.InnovationEnergyFlux;
 import com.mmodding.mmodding_lib.library.initializers.ElementsInitializer;
 import com.mmodding.mmodding_lib.library.utils.Colors;
 import com.mmodding.mmodding_lib.library.utils.TextUtils;
@@ -15,7 +14,7 @@ public class IIEvents implements ElementsInitializer {
     @Override
     public void register() {
         ItemTooltipCallback.EVENT.register((stack, player, context, lines) -> {
-            if (stack.getItem() instanceof InnovationEnergyFlux.Item IEF) {
+            if (stack.getItem() instanceof InnovationEnergyFluxOld.Item IEF) {
 
                 MutableComponent amountText = ComponentUtils.wrapInSquareBrackets(Component.translatable("ief.innovation_insights.amount"))
                     .withStyle(style -> style.withColor(new Colors.RGB(60, 75, 245).toDecimal()));

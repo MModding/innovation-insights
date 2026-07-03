@@ -1,13 +1,8 @@
 package com.mmodding.innovation_insights.init;
 
 import com.mmodding.innovation_insights.InnovationInsights;
-import com.mmodding.innovation_insights.item.AluminiumBattery;
-import com.mmodding.innovation_insights.item.CopperBattery;
 import com.mmodding.innovation_insights.item.InnovationEnergyFluxMeter;
 import com.mmodding.innovation_insights.item.Wrench;
-import com.mmodding.mmodding_lib.library.initializers.ElementsInitializer;
-import com.mmodding.mmodding_lib.library.items.CustomItem;
-import com.mmodding.mmodding_lib.library.items.settings.AdvancedItemSettings;
 
 public class IIItems implements ElementsInitializer {
 
@@ -15,9 +10,9 @@ public class IIItems implements ElementsInitializer {
 
 	public static final InnovationEnergyFluxMeter INNOVATION_ENERGY_FLUX_METER = new InnovationEnergyFluxMeter(new AdvancedItemSettings().group(IIItemGroups.INNOVATION_INSIGHTS_BASICS).maxCount(1));
 
-	public static final CopperBattery COPPER_BATTERY = new CopperBattery(new AdvancedItemSettings().group(IIItemGroups.INNOVATION_INSIGHTS_BASICS).maxCount(1));
+	public static final CopperBattery COPPER_BATTERY = new CopperBattery(100000, 10000, 10000, new AdvancedItemSettings().group(IIItemGroups.INNOVATION_INSIGHTS_BASICS).maxCount(1));
 
-	public static final AluminiumBattery ALUMINIUM_BATTERY = new AluminiumBattery(new AdvancedItemSettings().group(IIItemGroups.INNOVATION_INSIGHTS_BASICS).maxCount(1));
+	public static final AluminiumBattery ALUMINIUM_BATTERY = new AluminiumBattery(250000, 25000, 25000, new AdvancedItemSettings().group(IIItemGroups.INNOVATION_INSIGHTS_BASICS).maxCount(1));
 
 	public static final CustomItem ANVIL_DEBRIS = new CustomItem(new AdvancedItemSettings().group(IIItemGroups.INNOVATION_INSIGHTS_MATERIALS));
 

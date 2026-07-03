@@ -1,6 +1,5 @@
 package com.mmodding.innovation_insights.block.entity.engine;
 
-import com.mmodding.innovation_insights.InnovationEnergyFlux;
 import com.mmodding.innovation_insights.init.IIBlockEntities;
 import com.mmodding.innovation_insights.inventories.ImplementedInventory;
 import com.mmodding.innovation_insights.menu.engine.ExtractorScreenHandler;
@@ -19,7 +18,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 import team.reborn.energy.api.base.SimpleEnergyStorage;
 
-public class ExtractorEntity extends BlockEntity implements InnovationEnergyFlux.Container, MenuProvider, ImplementedInventory {
+public class ExtractorEntity extends BlockEntity implements InnovationEnergyFluxOld.Container, MenuProvider, ImplementedInventory {
 
     private final SimpleEnergyStorage energyStorage = new SimpleEnergyStorage(100000L, 10000L, 10000L);
 
