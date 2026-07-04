@@ -52,15 +52,15 @@ mmodding {
 		withContact {
 			homepage = "https://mmodding.com"
 			sources = "https://github.com/MModding/innovation"
-			issues = "https://github.com/MModding/delicate-sip/issues"
+			issues = "https://github.com/MModding/innovation-insights/issues"
 		}
 		environment = EnvironmentTarget.ANY
 		withEntrypoints {
-			init("com.mmodding.psithurism.Psithurism")
-			client("com.mmodding.psithurism.client.PsithurismClient")
-			custom("fabric-datagen", "com.mmodding.psithurism.PsithurismDataGenerator")
+			init("com.mmodding.innovation_insights.InnovationInsights")
+			client("com.mmodding.innovation_insights.client.InnovationInsightsClient")
+			// custom("fabric-datagen", "com.mmodding.psithurism.PsithurismDataGenerator")
 		}
-		addMixin("psithurism.mixins.json")
+		addMixin("innovation_insights.mixins.json")
 		withDependencies {
 			javaVersion = ">=" + libs.versions.java.get()
 			minecraftVersion = "~" + libs.versions.minecraft.get()

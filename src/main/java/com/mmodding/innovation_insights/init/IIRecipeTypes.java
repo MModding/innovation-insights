@@ -1,19 +1,28 @@
 package com.mmodding.innovation_insights.init;
 
 import com.mmodding.innovation_insights.InnovationInsights;
-import com.mmodding.innovation_insights.recipes.Compression;
-import com.mmodding.innovation_insights.recipes.Extraction;
-import com.mmodding.mmodding_lib.library.initializers.ElementsInitializer;
+import com.mmodding.innovation_insights.recipe.Compression;
+import com.mmodding.innovation_insights.recipe.Extraction;
+import com.mmodding.library.core.api.AdvancedContainer;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeType;
 
-public class IIRecipeTypes implements ElementsInitializer {
+public class IIRecipeTypes {
 
-    public static final Compression.Type COMPRESSION = new Compression.Type();
-    public static final Extraction.Type EXTRACTION = new Extraction.Type();
+	public static final RecipeType<Compression> COMPRESSION = register("compression");
+	public static final RecipeType<Extraction> EXTRACTION = register("extraction");
 
-    @Override
-    public void register() {
-        Registry.register(Registry.RECIPE_TYPE, InnovationInsights.createId("compression"), COMPRESSION);
-        Registry.register(Registry.RECIPE_TYPE, InnovationInsights.createId("extraction"), EXTRACTION);
-    }
+	static <T extends Recipe<?>> RecipeType<T> register(String name) {
+		return Registry.register(BuiltInRegistries.RECIPE_TYPE, InnovationInsights.createId(name), new RecipeType<T>() {
+
+			@Override
+			public String toString() {
+				return name;
+			}
+		});
+	}
+
+    public static void register(AdvancedContainer mod) {}
 }

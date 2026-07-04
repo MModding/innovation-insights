@@ -12,14 +12,14 @@ public class Wrench extends Item {
         super(properties);
     }
 
-    @Override
-    public InteractionResult useOnBlock(UseOnContext context) {
-        Block block = context.getLevel().getBlockState(context.getClickedPos()).getBlock();
+	@Override
+	public InteractionResult useOn(UseOnContext context) {
+		Block block = context.getLevel().getBlockState(context.getClickedPos()).getBlock();
 
-        if (context.getPlayer() != null) {
-			context.getPlayer().displayClientMessage(Component.nullToEmpty(block.getName().getString()), true);
+		if (context.getPlayer() != null) {
+			context.getPlayer().sendOverlayMessage(Component.nullToEmpty(block.getName().getString()));
 		}
 
-        return super.useOnBlock(context);
-    }
+		return super.useOn(context);
+	}
 }

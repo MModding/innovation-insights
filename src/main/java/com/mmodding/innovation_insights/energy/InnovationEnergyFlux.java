@@ -10,7 +10,7 @@ public class InnovationEnergyFlux implements EnergyUnit {
 
 	@Override
 	public long toFabricEnergy(long amount) {
-		return amount / 10;
+		return Math.floorDiv(amount, 10);
 	}
 
 	@Override

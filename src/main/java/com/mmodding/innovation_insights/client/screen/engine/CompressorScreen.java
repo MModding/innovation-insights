@@ -1,40 +1,31 @@
 package com.mmodding.innovation_insights.client.screen.engine;
 
 import com.mmodding.innovation_insights.InnovationInsights;
-import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.PoseStack;
+import com.mmodding.innovation_insights.menu.engine.CompressorMenu;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
-import net.minecraft.client.renderer.GameRenderer;
+import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.inventory.AbstractContainerMenu;
 
-public class CompressorScreen extends AbstractContainerScreen<AbstractContainerMenu> {
+public class CompressorScreen extends AbstractContainerScreen<CompressorMenu> {
 
-    public CompressorScreen(AbstractContainerMenu handler, Inventory inventory, Component title) {
-        super(handler, inventory, title);
-    }
+	private static final Identifier TEXTURE = InnovationInsights.createTexture("gui/container/compressor");
 
-    @Override
-    protected void renderBg(PoseStack matrices, float delta, int mouseX, int mouseY) {
-        RenderSystem.setShader(GameRenderer::getPositionTexShader);
-        RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
-        RenderSystem.setShaderTexture(0, InnovationInsights.createId("textures/gui/container/compressor.png"));
-        int x = (this.width - this.imageWidth) / 2;
-        int y = (this.height - this.imageHeight) / 2;
-        this.blit(matrices, x, y, 0, 0, this.imageWidth, this.imageHeight);
-    }
+	public CompressorScreen(CompressorMenu menu, Inventory inventory, Component title) {
+		super(menu, inventory, title);
+	}
 
-    @Override
-    public void render(PoseStack matrices, int mouseX, int mouseY, float delta) {
-        this.renderBackground(matrices);
-        super.render(matrices, mouseX, mouseY, delta);
-        this.renderTooltip(matrices, mouseX, mouseY);
-    }
+	@Override
+	public void extractBackground(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float a) {
+		super.extractBackground(graphics, mouseX, mouseY, a);
+		graphics.blit(RenderPipelines.GUI_TEXTURED, TEXTURE, this.leftPos, this.topPos, 0.0F, 0.0F, this.imageWidth, this.imageHeight, 256, 256);
+	}
 
-    @Override
-    protected void init() {
-        super.init();
-        this.titleLabelX = (this.imageWidth - this.font.width(this.title)) / 2;
-    }
+	@Override
+	protected void init() {
+		super.init();
+		this.titleLabelX = (this.imageWidth - this.font.width(this.title)) / 2;
+	}
 }

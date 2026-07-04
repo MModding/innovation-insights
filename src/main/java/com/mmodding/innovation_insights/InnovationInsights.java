@@ -16,11 +16,11 @@ public class InnovationInsights implements ExtendedModInitializer {
 	@Override
 	public void setupManager(ElementsManager manager) {
 		manager.content(IIBlocks::register);
-		manager.content(IIBlockEntities::register);
+		manager.content(IIBlockEntityTypes::register);
 		manager.content(IIItems::register);
 		manager.content(IIEvents::register);
 		manager.content(IIItemGroups::register);
-		manager.content(IIFeatures::register);
+		manager.content(IIPlacedFeatures::register);
 		manager.content(IIScreenHandlers::register);
 		manager.content(IIRecipeSerializers::register);
 		manager.content(IIRecipeTypes::register);

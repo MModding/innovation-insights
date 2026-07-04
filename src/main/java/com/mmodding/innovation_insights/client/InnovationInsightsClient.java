@@ -1,29 +1,19 @@
 package com.mmodding.innovation_insights.client;
 
 import com.mmodding.innovation_insights.client.init.IIModelPredicates;
-import com.mmodding.innovation_insights.client.init.IIRenderLayers;
 import com.mmodding.innovation_insights.client.init.IIScreens;
-import com.mmodding.mmodding_lib.library.base.MModdingClientModInitializer;
-import com.mmodding.mmodding_lib.library.config.Config;
-import com.mmodding.mmodding_lib.library.initializers.ClientElementsInitializer;
-import org.jetbrains.annotations.Nullable;
+import com.mmodding.library.core.api.AdvancedContainer;
+import com.mmodding.library.core.api.client.ExtendedClientModInitializer;
+import com.mmodding.library.core.api.management.ElementsManager;
 
-import java.util.ArrayList;
-import java.util.List;
+public class InnovationInsightsClient implements ExtendedClientModInitializer {
 
-public class InnovationInsightsClient implements MModdingClientModInitializer {
+	@Override
+	public void setupManager(ElementsManager manager) {
+		// manager.content(IIModelPredicates::register);
+		manager.content(IIScreens::register);
+	}
 
-    @Override
-    public @Nullable Config getClientConfig() {
-        return null;
-    }
-
-    @Override
-    public List<ClientElementsInitializer> getClientElementsInitializers() {
-        List<ClientElementsInitializer> clientElementsInitializers = new ArrayList<>();
-        clientElementsInitializers.add(new IIModelPredicates());
-        clientElementsInitializers.add(new IIRenderLayers());
-        clientElementsInitializers.add(new IIScreens());
-        return clientElementsInitializers;
-    }
+	@Override
+	public void onInitializeClient(AdvancedContainer mod) {}
 }

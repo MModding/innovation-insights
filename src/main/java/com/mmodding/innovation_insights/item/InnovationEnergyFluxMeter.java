@@ -23,7 +23,7 @@ public class InnovationEnergyFluxMeter extends Item implements FabricItem {
 		super(properties);
 	}
 
-	public static int getIndicatorRate(ItemStack stack) {
+	/* public static int getIndicatorRate(ItemStack stack) {
 		return Mth.clamp(stack.getOrCreateTag().getInt("IndicatorRate"), 0, 10);
 	}
 
@@ -107,10 +107,10 @@ public class InnovationEnergyFluxMeter extends Item implements FabricItem {
 		}
 
 		return super.useOnBlock(context);
-	}
+	} */
 
 	@Override
-	public boolean allowNbtUpdateAnimation(Player player, InteractionHand hand, ItemStack oldStack, ItemStack newStack) {
+	public boolean allowComponentsUpdateAnimation(Player player, InteractionHand hand, ItemStack oldStack, ItemStack newStack) {
 		return false;
 	}
 }

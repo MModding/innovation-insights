@@ -1,19 +1,18 @@
 package com.mmodding.innovation_insights.init;
 
-import com.mmodding.innovation_insights.InnovationInsights;
-import com.mmodding.innovation_insights.recipes.CompressionSerializer;
-import com.mmodding.innovation_insights.recipes.ExtractionSerializer;
-import com.mmodding.mmodding_lib.library.initializers.ElementsInitializer;
-import net.minecraft.core.Registry;
+import com.mmodding.innovation_insights.recipe.Compression;
+import com.mmodding.innovation_insights.recipe.Extraction;
+import com.mmodding.library.core.api.AdvancedContainer;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.world.item.crafting.RecipeSerializer;
 
-public class IIRecipeSerializers implements ElementsInitializer {
+public class IIRecipeSerializers {
 
-    public static final CompressionSerializer COMPRESSION_SERIALIZER = new CompressionSerializer();
-    public static final ExtractionSerializer EXTRACTION_SERIALIZER = new ExtractionSerializer();
+	public static final RecipeSerializer<Compression> COMPRESSION = new RecipeSerializer<>(Compression.MAP_CODEC, Compression.STREAM_CODEC);
+	public static final RecipeSerializer<Extraction> EXTRACTION = new RecipeSerializer<>(Extraction.MAP_CODEC, Extraction.STREAM_CODEC);
 
-    @Override
-    public void register() {
-        Registry.register(Registry.RECIPE_SERIALIZER, InnovationInsights.createId("compression"), COMPRESSION_SERIALIZER);
-        Registry.register(Registry.RECIPE_SERIALIZER, InnovationInsights.createId("extraction"), EXTRACTION_SERIALIZER);
+    public static void register(AdvancedContainer mod) {
+		mod.register(BuiltInRegistries.RECIPE_SERIALIZER, "compression", COMPRESSION);
+		mod.register(BuiltInRegistries.RECIPE_SERIALIZER, "extraction", EXTRACTION);
     }
 }

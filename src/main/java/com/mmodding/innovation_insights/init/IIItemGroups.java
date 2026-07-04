@@ -1,14 +1,10 @@
 package com.mmodding.innovation_insights.init;
 
-import com.mmodding.innovation_insights.InnovationInsights;
-import com.mmodding.mmodding_lib.library.initializers.ElementsInitializer;
-import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.ItemStack;
-import org.quiltmc.qsl.item.group.api.QuiltItemGroup;
+import com.mmodding.library.core.api.AdvancedContainer;
 
-public class IIItemGroups implements ElementsInitializer {
+public class IIItemGroups {
 
-    public static final CreativeModeTab INNOVATION_INSIGHTS_BASICS = QuiltItemGroup.createWithIcon(
+    /* public static final CreativeModeTab INNOVATION_INSIGHTS_BASICS = QuiltItemGroup.createWithIcon(
         InnovationInsights.createId("basic"),
         () -> new ItemStack(IIItems.WRENCH)
     );
@@ -36,8 +32,7 @@ public class IIItemGroups implements ElementsInitializer {
     public static final CreativeModeTab INNOVATION_INSIGHTS_ORES = QuiltItemGroup.createWithIcon(
         InnovationInsights.createId("ores"),
         () -> new ItemStack(IIBlocks.BAUXITE_ORE)
-    );
+    ); */
 
-    @Override
-    public void register() {}
+    public static void register(AdvancedContainer mod) {}
 }

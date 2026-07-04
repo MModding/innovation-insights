@@ -3,16 +3,13 @@ package com.mmodding.innovation_insights.client.init;
 import com.mmodding.innovation_insights.init.IIScreenHandlers;
 import com.mmodding.innovation_insights.client.screen.engine.CompressorScreen;
 import com.mmodding.innovation_insights.client.screen.engine.ExtractorScreen;
-import com.mmodding.innovation_insights.client.screen.generator.AnvilFissionGeneratorScreen;
-import com.mmodding.mmodding_lib.library.initializers.ClientElementsInitializer;
+import com.mmodding.library.core.api.AdvancedContainer;
 import net.minecraft.client.gui.screens.MenuScreens;
 
-public class IIScreens implements ClientElementsInitializer {
+public class IIScreens {
 
-    @Override
-    public void registerClient() {
-        MenuScreens.register(IIScreenHandlers.COMPRESSOR_HANDLER, CompressorScreen::new);
-        MenuScreens.register(IIScreenHandlers.EXTRACTOR_HANDLER, ExtractorScreen::new);
-        MenuScreens.register(IIScreenHandlers.ANVIL_FISSION_GENERATOR_HANDLER, AnvilFissionGeneratorScreen::new);
+    public static void register(AdvancedContainer mod) {
+        MenuScreens.register(IIScreenHandlers.COMPRESSOR, CompressorScreen::new);
+        MenuScreens.register(IIScreenHandlers.EXTRACTOR, ExtractorScreen::new);
     }
 }

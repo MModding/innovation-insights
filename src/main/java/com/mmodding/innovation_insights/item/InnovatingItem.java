@@ -9,7 +9,7 @@ import com.mmodding.library.java.api.color.RGB;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
-public abstract class InnovatingItem extends Item {
+public class InnovatingItem extends Item {
 
 	public InnovatingItem(int capacity, long inputRate, long outputRate, Properties properties) {
 		super(properties);
