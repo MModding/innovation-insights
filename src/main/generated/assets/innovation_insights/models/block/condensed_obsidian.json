@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "innovation_insights:block/condensed_obsidian"
+  }
+}

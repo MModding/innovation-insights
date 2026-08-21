@@ -19,7 +19,7 @@ public class InnovationInsights implements ExtendedModInitializer {
 		manager.content(IIBlockEntityTypes::register);
 		manager.content(IIItems::register);
 		manager.content(IIEvents::register);
-		manager.content(IIItemGroups::register);
+		manager.content(IICreativeModTabs::register);
 		manager.content(IIPlacedFeatures::register);
 		manager.content(IIScreenHandlers::register);
 		manager.content(IIRecipeSerializers::register);

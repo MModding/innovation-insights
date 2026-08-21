@@ -1,8 +1,10 @@
 package com.mmodding.innovation_insights.init;
 
 import com.mmodding.innovation_insights.InnovationInsights;
-import com.mmodding.innovation_insights.block.engine.CompressorBlock;
-import com.mmodding.innovation_insights.block.engine.ExtractorBlock;
+import com.mmodding.innovation_insights.block.CreativeEnergyProviderBlock;
+import com.mmodding.innovation_insights.block.EnergyCableBlock;
+import com.mmodding.innovation_insights.block.old.engine.CompressorBlock;
+import com.mmodding.innovation_insights.block.old.engine.ExtractorBlock;
 import com.mmodding.library.block.api.util.BlockFactory;
 import com.mmodding.library.core.api.AdvancedContainer;
 import net.minecraft.core.registries.Registries;
@@ -47,6 +49,10 @@ public class IIBlocks {
 	public static final Block THERMAL_REACTOR_CONTAINER = register("thermal_reactor_container", BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK).destroyTime(5.0f).requiresCorrectToolForDrops().noOcclusion()).registerItem();
 
 	public static final Block THERMAL_REACTOR_FRAME = register("thermal_reactor_frame", BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK).destroyTime(5.0f).requiresCorrectToolForDrops()).registerItem();
+
+	public static final Block CREATIVE_ENERGY_PROVIDER = register("creative_energy_provider", CreativeEnergyProviderBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK).destroyTime(5.0f).requiresCorrectToolForDrops()).registerItem();
+
+	public static final Block ENERGY_CABLE = register("energy_cable", EnergyCableBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK)).registerItem();
 
 	public static Block register(String string, BlockBehaviour.Properties properties) {
 		return register(string, Block::new, properties);

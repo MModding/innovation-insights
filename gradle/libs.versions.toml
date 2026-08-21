@@ -4,7 +4,7 @@ minecraft = "26.2"
 fabric_loader = "0.19.3"
 
 fabric_api = "0.152.1+26.2"
-mmodding = "0.5.0-alpha+26.2"
+mmodding = "0.7.2-alpha+26.2"
 
 [libraries]
 minecraft = { module = "com.mojang:minecraft", version.ref = "minecraft" }
@@ -16,4 +16,4 @@ mmodding = { module = "com.mmodding:mmodding-library", version.ref = "mmodding" 
 [plugins]
 fabric_loom = { id = "net.fabricmc.fabric-loom", version = "1.17-SNAPSHOT" }
 mod_publish = { id = "me.modmuss50.mod-publish-plugin", version = "2.0.0" }
-mmodding_gradle = { id = "com.mmodding.gradle", version = "0.1.6-beta" }
+mmodding_gradle = { id = "com.mmodding.gradle", version = "0.1.8-beta" }

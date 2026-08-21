@@ -1,9 +1,0 @@
-{
-  "parent": "block/orientable",
-  "textures": {
-    "front": "innovation_insights:block/thermal_reactor_interface",
-    "side": "innovation_insights:block/steel_block",
-    "top": "innovation_insights:block/steel_block",
-    "bottom": "innovation_insights:block/steel_block"
-  }
-}

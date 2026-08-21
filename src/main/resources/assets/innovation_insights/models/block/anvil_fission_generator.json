@@ -1,6 +1,0 @@
-{
-  "parent": "block/cube_all",
-  "textures": {
-    "front": "innovation_insights:block/anvil_fission_generator"
-  }
-}

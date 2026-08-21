@@ -58,7 +58,7 @@ mmodding {
 		withEntrypoints {
 			init("com.mmodding.innovation_insights.InnovationInsights")
 			client("com.mmodding.innovation_insights.client.InnovationInsightsClient")
-			// custom("fabric-datagen", "com.mmodding.psithurism.PsithurismDataGenerator")
+			datagen("com.mmodding.innovation_insights.InnovationInsightsDataGenerator")
 		}
 		addMixin("innovation_insights.mixins.json")
 		withDependencies {

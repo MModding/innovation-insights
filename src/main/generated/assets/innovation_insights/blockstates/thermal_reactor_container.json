@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "innovation_insights:block/thermal_reactor_container"
+    }
+  }
+}

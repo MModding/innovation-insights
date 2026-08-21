@@ -1,6 +1,0 @@
-{
-  "parent": "item/generated",
-  "textures": {
-    "layer0": "innovation_insights:item/innovation_energy_flux_meter_2"
-  }
-}
