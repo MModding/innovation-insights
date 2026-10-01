@@ -4,7 +4,6 @@ import com.mmodding.innovation_insights.core.PipeMode;
 import com.mmodding.innovation_insights.energy.access.EnergyCableAccess;
 import com.mmodding.innovation_insights.init.IIBlocks;
 import com.mmodding.library.energy.api.block.BlockEnergy;
-import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -18,8 +17,6 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 
 public class EnergyCableBlock extends PipeBlock {
-
-	public static final MapCodec<EnergyCableBlock> CODEC = simpleCodec(EnergyCableBlock::new);
 
 	public static final EnumProperty<PipeMode> MODE = EnumProperty.create("pipe_mode", PipeMode.class);
 
@@ -58,11 +55,6 @@ public class EnergyCableBlock extends PipeBlock {
 				return null;
 			}
 		});
-	}
-
-	@Override
-	protected MapCodec<? extends PipeBlock> codec() {
-		return CODEC;
 	}
 
 	@Override

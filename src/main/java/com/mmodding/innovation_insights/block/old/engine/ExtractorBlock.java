@@ -5,7 +5,6 @@ import com.mmodding.innovation_insights.energy.InnovationEnergyFlux;
 import com.mmodding.innovation_insights.init.IIBlockEntityTypes;
 import com.mmodding.library.energy.api.access.EnergyAccess;
 import com.mmodding.library.energy.api.block.BlockEnergy;
-import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -27,18 +26,11 @@ import org.jetbrains.annotations.Nullable;
 
 public class ExtractorBlock extends BaseEntityBlock {
 
-	public static final MapCodec<ExtractorBlock> CODEC = simpleCodec(ExtractorBlock::new);
-
     public ExtractorBlock(Properties settings) {
         super(settings);
         this.registerDefaultState(this.defaultBlockState().setValue(BlockStateProperties.HORIZONTAL_FACING, Direction.NORTH));
 	    BlockEnergy.defineEnergy(this, 100000L, InnovationEnergyFlux.UNIT, (level, pos, _, _, side, internalComponent) -> EnergyAccess.limited(EnergyAccess.from(internalComponent), 10000L, 10000L));
     }
-
-	@Override
-	protected MapCodec<? extends BaseEntityBlock> codec() {
-		return CODEC;
-	}
 
 	@Nullable
     @Override

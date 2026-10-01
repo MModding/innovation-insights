@@ -1,7 +1,6 @@
 package com.mmodding.innovation_insights.block.old.reactor;
 
 import com.mmodding.innovation_insights.InnovationInsights;
-import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionResult;
@@ -20,19 +19,12 @@ import org.jetbrains.annotations.Nullable;
 
 public class ThermalReactorInterface extends BaseEntityBlock {
 
-	public static final MapCodec<ThermalReactorInterface> CODEC = simpleCodec(ThermalReactorInterface::new);
-
     public static final Property<Direction> FACING = BlockStateProperties.HORIZONTAL_FACING;
 
     public ThermalReactorInterface(Properties properties) {
         super(properties);
         this.registerDefaultState(this.defaultBlockState().setValue(BlockStateProperties.HORIZONTAL_FACING, Direction.NORTH));
     }
-
-	@Override
-	protected MapCodec<? extends BaseEntityBlock> codec() {
-		return CODEC;
-	}
 
 	@Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
@@ -53,8 +45,7 @@ public class ThermalReactorInterface extends BaseEntityBlock {
 
 	@Override
 	protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
-		assert player.swingingArm != null;
-		if (InnovationInsights.excludeBasics(player.getItemInHand(player.swingingArm))) {
+		if (InnovationInsights.excludeBasics(player.getMainHandItem())) {
 			if (!level.isClientSide()) {
 				MenuProvider screenHandlerFactory = state.getMenuProvider(level, pos);
 

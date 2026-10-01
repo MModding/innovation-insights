@@ -2,7 +2,6 @@ package com.mmodding.innovation_insights.block;
 
 import com.mmodding.innovation_insights.block.entity.CreativeEnergyProviderBlockEntity;
 import com.mmodding.innovation_insights.init.IIBlockEntityTypes;
-import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseEntityBlock;
@@ -14,15 +13,8 @@ import org.jspecify.annotations.Nullable;
 
 public class CreativeEnergyProviderBlock extends BaseEntityBlock {
 
-	public static final MapCodec<CreativeEnergyProviderBlock> CODEC = simpleCodec(CreativeEnergyProviderBlock::new);
-
 	public CreativeEnergyProviderBlock(Properties properties) {
 		super(properties);
-	}
-
-	@Override
-	protected MapCodec<? extends BaseEntityBlock> codec() {
-		return CODEC;
 	}
 
 	@Override

@@ -2,7 +2,6 @@ package com.mmodding.innovation_insights.block.old.engine;
 
 import com.mmodding.innovation_insights.block.old.entity.engine.CompressorBlockEntity;
 import com.mmodding.innovation_insights.init.IIBlockEntityTypes;
-import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -26,17 +25,10 @@ import org.jetbrains.annotations.Nullable;
 
 public class CompressorBlock extends BaseEntityBlock implements EntityBlock {
 
-	public static final MapCodec<CompressorBlock> CODEC = simpleCodec(CompressorBlock::new);
-
     public CompressorBlock(Properties properties) {
         super(properties);
         this.registerDefaultState(this.defaultBlockState().setValue(BlockStateProperties.HORIZONTAL_FACING, Direction.NORTH));
     }
-
-	@Override
-	protected MapCodec<? extends BaseEntityBlock> codec() {
-		return CODEC;
-	}
 
 	@Nullable
     @Override

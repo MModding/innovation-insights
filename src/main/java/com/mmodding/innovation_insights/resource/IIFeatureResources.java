@@ -1,11 +1,5 @@
 package com.mmodding.innovation_insights.resource;
 
-import com.mmodding.innovation_insights.init.IIBlocks;
-import net.minecraft.data.worldgen.features.OreFeatures;
-import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguration;
-
-import java.util.List;
-
 public class IIFeatureResources {
 
 	/* public static final List<OreConfiguration.TargetBlockState> BAUXITE_ORE_TARGETS = List.of(
